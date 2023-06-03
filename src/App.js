@@ -1,23 +1,34 @@
-import logo from './logo.svg';
+
+import { useState } from 'react';
 import './App.css';
+import ExpenseForm from './UI/Components/expenseForm';
+import ExpenseList from './UI/Components/expenseList';
 
 function App() {
+  const [expenses,setExpenses] = useState([
+    {
+      title : "",
+      amount: "",
+      date : ""
+}]);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <ExpenseForm setExpenses={setExpenses} expenses={expenses}>
+        {" "}
+        </ExpenseForm>
+        {
+          expenses.map(
+            (item,idx) => (
+              <ExpenseList 
+                key={idx}
+                title = {item.title}
+                amount = {item.amount}
+                date = {item.date}
+              />
+            )
+          )
+        }
+       
     </div>
   );
 }
